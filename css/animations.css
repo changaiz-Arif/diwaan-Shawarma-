@@ -1,0 +1,106 @@
+/* ============================================================
+   DEWAAN SHAWARMA — ANIMATIONS
+   Scroll reveals, cart pulse, hero entrance, hover motion.
+   Respects prefers-reduced-motion throughout.
+   ============================================================ */
+
+@keyframes cart-pulse {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.15); border-color: var(--saffron); }
+  100% { transform: scale(1); }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes drift {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes scroll-cue {
+  0% { transform: scaleY(0); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  51% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* ---------- Scroll reveal ---------- */
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger children of a grid slightly for a nicer cascade */
+.product-grid [data-reveal]:nth-child(2) { transition-delay: 0.05s; }
+.product-grid [data-reveal]:nth-child(3) { transition-delay: 0.1s; }
+.product-grid [data-reveal]:nth-child(4) { transition-delay: 0.15s; }
+.product-grid [data-reveal]:nth-child(5) { transition-delay: 0.2s; }
+.product-grid [data-reveal]:nth-child(6) { transition-delay: 0.25s; }
+
+/* ---------- Hero entrance ---------- */
+
+.hero__content .eyebrow,
+.hero__content h1,
+.hero__content .hero__lede,
+.hero__content .hero__actions {
+  animation: hero-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero__content h1 { animation-delay: 0.08s; }
+.hero__content .hero__lede { animation-delay: 0.16s; }
+.hero__content .hero__actions { animation-delay: 0.24s; }
+
+.hero__scroll-cue span {
+  animation: scroll-cue 2.2s ease-in-out infinite;
+}
+
+/* ---------- Ambient drift on brand mark ---------- */
+
+.brand__mark {
+  animation: drift 5s ease-in-out infinite;
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
