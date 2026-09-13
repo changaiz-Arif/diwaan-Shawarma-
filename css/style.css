@@ -1684,3 +1684,10 @@ section {
   z-index: 2 !important;
   margin-top: 12px !important;
 }
+
+.checkout-form .btn--block {
+  position: sticky !important;
+  bottom: 0 !important;
+  z-index: 10 !important;
+  margin-top: 12px !important;
+}
